@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
+import DataStatistics from "./dataStatistics";
 
 export default function UploadDataset() {
   const [data, setData] = useState<any[]>([]);
@@ -16,9 +17,11 @@ export default function UploadDataset() {
       Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
-        complete: (result) => {
-          setColumns(Object.keys(result.data[0]));
-          setData(result.data);
+        complete: (result: Papa.ParseResult<any>) => {
+          if (result.data.length > 0) {
+            setColumns(Object.keys(result.data[0]));
+            setData(result.data);
+          }
         },
       });
     } else if (fileExtension === "xlsx" || fileExtension === "xls") {
@@ -29,8 +32,10 @@ export default function UploadDataset() {
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(sheet);
-        setColumns(Object.keys(jsonData[0]));
-        setData(jsonData);
+        if (jsonData.length > 0 && typeof jsonData[0] === 'object') {
+          setColumns(Object.keys(jsonData[0] as object));
+          setData(jsonData);
+        }
       };
       reader.readAsBinaryString(file);
     } else {
@@ -48,34 +53,39 @@ export default function UploadDataset() {
       </label>
 
       {data.length > 0 && (
-        <div className="mt-8 w-full max-w-5xl overflow-x-auto">
-          <table className="min-w-full border border-gray-300 bg-white rounded-lg shadow-sm">
-            <thead className="bg-gray-200">
-              <tr>
-                {columns.map((col) => (
-                  <th key={col} className="px-4 py-2 border-b text-sm font-medium text-gray-700">
-                    {col}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.slice(0, 10).map((row, i) => (
-                <tr key={i} className="hover:bg-gray-50">
+        <>
+          <DataStatistics data={data} columns={columns} />
+
+          <div className="mt-8 w-full max-w-5xl overflow-x-auto">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Data Preview</h3>
+            <table className="min-w-full border border-gray-300 bg-white rounded-lg shadow-sm">
+              <thead className="bg-gray-200">
+                <tr>
                   {columns.map((col) => (
-                    <td key={col} className="px-4 py-2 border-b text-sm text-gray-600">
-                      {row[col] as string}
-                    </td>
+                    <th key={col} className="px-4 py-2 border-b text-sm font-medium text-gray-700">
+                      {col}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.slice(0, 10).map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50">
+                    {columns.map((col) => (
+                      <td key={col} className="px-4 py-2 border-b text-sm text-gray-600">
+                        {row[col] as string}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-          <p className="text-gray-500 text-sm mt-3">
-            Showing first 10 rows of {data.length} loaded.
-          </p>
-        </div>
+            <p className="text-gray-500 text-sm mt-3">
+              Showing first 10 rows of {data.length} loaded.
+            </p>
+          </div>
+        </>
       )}
     </div>
   );
