@@ -2,6 +2,7 @@ import { useState } from "react";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
 import DataStatistics from "./dataStatistics";
+import DataVisualization from "./dataVisualization";
 
 export default function UploadDataset() {
   const [data, setData] = useState<any[]>([]);
@@ -55,6 +56,8 @@ export default function UploadDataset() {
       {data.length > 0 && (
         <>
           <DataStatistics data={data} columns={columns} />
+          
+          <DataVisualization data={data} columns={columns} />
 
           <div className="mt-8 w-full max-w-5xl overflow-x-auto">
             <h3 className="text-xl font-semibold mb-4 text-gray-800">Data Preview</h3>
