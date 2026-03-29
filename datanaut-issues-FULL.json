@@ -1,0 +1,159 @@
+{
+  "issues": [
+    {
+      "title": "[DECISION] Arquitectura: Next.js solo vs Next.js + FastAPI h\u00edbrido",
+      "labels": "architecture,decision-needed,priority-critical",
+      "body": "Decisiones de arquitectura backend..."
+    },
+    {
+      "title": "[DECISION] L\u00edmites de seguridad y privacidad de datos",
+      "labels": "business-logic,security,decision-needed,priority-high",
+      "body": "Decisiones de seguridad y PII..."
+    },
+    {
+      "title": "[FASE-1] Migrar de React 19 + Vite a Next.js 15 App Router",
+      "labels": "phase-1,migration,infrastructure,priority-high",
+      "body": "Migraci\u00f3n completa a Next.js 15..."
+    },
+    {
+      "title": "[FASE-1] Crear API Route /api/analyze para procesamiento de archivos",
+      "labels": "phase-1,backend,api,priority-high",
+      "body": "Endpoint para procesar CSV/Excel..."
+    },
+    {
+      "title": "[FASE-1] Implementar Enhanced Statistics Engine (backend)",
+      "labels": "phase-1,backend,analytics,priority-high",
+      "body": "Stats engine con mean, median, std, skewness, kurtosis..."
+    },
+    {
+      "title": "[FASE-1] Implementar Correlation Matrix & Scatter Plot Analysis",
+      "labels": "phase-1,backend,analytics,visualization,priority-high",
+      "body": "Correlation matrix y scatter plot matrix..."
+    },
+    {
+      "title": "[FASE-1] Implementar Outlier Detection Engine",
+      "labels": "phase-1,backend,analytics,priority-high",
+      "body": "Outlier detection con IQR y Z-score..."
+    },
+    {
+      "title": "[FASE-1] Auto-Insights Engine - Generador de Insights Inteligentes",
+      "labels": "phase-1,backend,feature,priority-high",
+      "body": "Generador autom\u00e1tico de insights priorizados..."
+    },
+    {
+      "title": "[FASE-1] Migrar Recharts a Plotly.js para visualizaciones avanzadas",
+      "labels": "phase-1,frontend,migration,visualization,priority-high",
+      "body": "Migraci\u00f3n de Recharts a Plotly.js..."
+    },
+    {
+      "title": "[FASE-1] Crear componente AutoVisualizationGrid (generado autom\u00e1ticamente)",
+      "labels": "phase-1,frontend,feature,visualization,priority-high",
+      "body": "Grid de visualizaciones auto-generado..."
+    },
+    {
+      "title": "[FASE-1] Crear componente AutoInsightsPanel UI",
+      "labels": "phase-1,frontend,ui/ux,feature,priority-high",
+      "body": "UI para mostrar insights con acciones..."
+    },
+    {
+      "title": "[FASE-1] Implementar export de dataset limpio (CSV)",
+      "labels": "phase-1,frontend,feature,priority-medium",
+      "body": "Exportar dataset con outliers marcados/removidos..."
+    },
+    {
+      "title": "[FASE-1] Implementar export de Summary Report (TXT/Markdown)",
+      "labels": "phase-1,frontend,feature,priority-medium",
+      "body": "Generar reporte en texto/markdown..."
+    },
+    {
+      "title": "[FASE-1] Implementar detecci\u00f3n avanzada de tipos de datos",
+      "labels": "phase-1,backend,analytics,priority-medium",
+      "body": "Detectar emails, fechas, IDs, URLs, booleanos..."
+    },
+    {
+      "title": "[FASE-1] Implementar detecci\u00f3n de time series autom\u00e1tica",
+      "labels": "phase-1,backend,analytics,priority-medium",
+      "body": "Detectar series temporales autom\u00e1ticamente..."
+    },
+    {
+      "title": "[FASE-1] Implementar data quality score",
+      "labels": "phase-1,frontend,analytics,priority-medium",
+      "body": "Score de calidad 0-100 para el dataset..."
+    },
+    {
+      "title": "[FASE-2] Crear componente DashboardLayout con grid auto-generado",
+      "labels": "phase-2,frontend,feature,priority-high",
+      "body": "Layout del dashboard con grid..."
+    },
+    {
+      "title": "[FASE-2] Implementar toggle para mostrar/ocultar visualizaciones",
+      "labels": "phase-2,frontend,ui/ux,priority-medium",
+      "body": "Toggle para mostrar/ocultar charts..."
+    },
+    {
+      "title": "[FASE-2] Implementar reordenamiento simple de visualizaciones",
+      "labels": "phase-2,frontend,ui/ux,priority-medium",
+      "body": "Drag-and-drop simple con react-beautiful-dnd..."
+    },
+    {
+      "title": "[FASE-2] Persistir dashboard layout en localStorage",
+      "labels": "phase-2,frontend,feature,priority-medium",
+      "body": "Guardar configuraci\u00f3n del dashboard..."
+    },
+    {
+      "title": "[FASE-3] [DECISION] Implementar FastAPI backend vs mantener Next.js",
+      "labels": "phase-3,architecture,decision-needed,conditional,priority-critical",
+      "body": "Decisi\u00f3n de implementar FastAPI..."
+    },
+    {
+      "title": "[FASE-3] Implementar endpoint /api/v1/analyze con ydata-profiling",
+      "labels": "phase-3,backend,api,ml,conditional,priority-high",
+      "body": "Endpoint con ydata-profiling para an\u00e1lisis profundo..."
+    },
+    {
+      "title": "[FASE-3] Implementar endpoint /api/v1/cluster (K-means)",
+      "labels": "phase-3,backend,api,ml,conditional,priority-medium",
+      "body": "Clustering con K-means y elbow method..."
+    },
+    {
+      "title": "[FASE-3] Implementar endpoint /api/v1/anomalies (Isolation Forest)",
+      "labels": "phase-3,backend,api,ml,conditional,priority-medium",
+      "body": "Detecci\u00f3n de anomal\u00edas con Isolation Forest..."
+    },
+    {
+      "title": "[FASE-3] Dockerizar FastAPI backend",
+      "labels": "phase-3,devops,infrastructure,conditional,priority-medium",
+      "body": "Dockerfile y docker-compose para FastAPI..."
+    },
+    {
+      "title": "[FASE-4] Implementar export PDF report con html2canvas + jsPDF",
+      "labels": "phase-4,frontend,feature,priority-medium",
+      "body": "Generar PDF profesional con visualizaciones..."
+    },
+    {
+      "title": "[FASE-4] Implementar share URL con query params",
+      "labels": "phase-4,frontend,feature,priority-medium",
+      "body": "Compartir dashboard mediante URL..."
+    },
+    {
+      "title": "[FASE-5] Implementar detecci\u00f3n y sanitizaci\u00f3n de PII",
+      "labels": "phase-5,security,backend,priority-high",
+      "body": "Detectar y anonimizar informaci\u00f3n sensible..."
+    },
+    {
+      "title": "[FASE-5] Implementar rate limiting y security headers",
+      "labels": "phase-5,security,backend,priority-medium",
+      "body": "Rate limiting y headers de seguridad..."
+    },
+    {
+      "title": "[FASE-5] Dise\u00f1ar arquitectura extensible para conexi\u00f3n a bases de datos",
+      "labels": "phase-5,architecture,future-proofing,priority-low",
+      "body": "Interfaz abstracta para PostgreSQL, MySQL, BigQuery..."
+    },
+    {
+      "title": "[INFRA] Establecer estructura de directorios final",
+      "labels": "setup,infrastructure,priority-high",
+      "body": "Estructura de carpetas para todo el proyecto..."
+    }
+  ]
+}

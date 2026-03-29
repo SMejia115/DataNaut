@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "project": "DataNaut",
+    "version": "1.0",
+    "total_issues": 31,
+    "github_cli_required": true,
+    "gh_install_command": "brew install gh && gh auth login",
+    "run_command": "python3 create-issues-from-json.py"
+  },
+  "issues": [
+    {
+      "title": "[DECISION] Arquitectura: Next.js solo vs Next.js + FastAPI híbrido",
+      "body": "## Contexto\nNecesitamos decidir la arquitectura backend para DataNaut basado en:\n- Tamaño máximo de datasets esperado: [PENDIENTE: definir]\n- Timeline: MVP rápido (3 semanas) vs robusto (5 semanas)\n- Presupuesto infraestructura: [PENDIENTE: definir]\n- Complejidad de análisis: Estadísticas vs ML\n\n## Opciones\n\n### Opción A: Next.js 15 API Routes (Monolítico)\n**Pros:**\n- Deploy simple en Vercel (gratis/muy económico)\n- Sin infraestructura adicional\n- Menor latencia (no llamadas de red entre servicios)\n- Usar pyodide (WebAssembly) para pandas en browser\n\n**Cons:**\n- Límite de 4.5MB (Vercel Hobby) o 100MB (Pro) en body requests\n- Procesamiento en browser puede bloquear UI para datasets >10MB\n- No se puede usar scikit-learn, ydata-profiling nativo\n- CPU limitado en Vercel\n\n**Mejor para:** MVP rápido, datasets <20MB, sin ML complejo\n\n### Opción B: Next.js + FastAPI Microservice (Híbrido)\n**Pros:**\n- Pandas, NumPy, scikit-learn al 100%\n- ydata-profiling para análisis automático completo\n- Maneja datasets grandes (hasta 2GB con streaming)\n- Async processing con Celery si es necesario\n\n**Cons:**\n- Deploy más complejo (Docker, Railway/Render)\n- Comunicación entre servicios (CORS, retries)\n- Costo mínimo $10-20/mes\n- Overhead de mantener dos servicios\n\n**Mejor para:** Datasets >20MB, ML clustering/predicción, producción seria\n\n### Opción C: Next.js API Routes + Python Worker (Eventual)\n**Pros:**\n- Start simple, escala cuando sea necesario\n- API Routes para Fase 1, migrar patrones costosos a Python\n- Balanceado\n\n**Cons:**\n- Refactoring necesario en Fase 3\n\n## Preguntas para responder:\n1. ¿Cuál es el tamaño máximo de dataset esperado en los primeros 3 meses?\n2. ¿Necesitas ML (clustering, predicción) en el MVP o puede esperar?\n3. ¿Presupuesto infraestructura: $0, $10-20/mes, o más?\n4. ¿Deploy timeline: 1 semana o 3 semanas?\n\n## Recomendación Técnica:\n- Para datasets <20MB: Opción A (Next.js solo) con pyodide\n- Para datasets >20MB o ML inmediato: Opción B (FastAPI desde Fase 1)\n\n## Acceptance Criteria:\n- [ ] Decisión documentada en /docs/architecture-decision-record.md\n- [ ] Team consensus alcanzado\n- [ ] Presupuesto aprobado si se necesita infraestructura",
+      "labels": "architecture,decision-needed,priority-critical"
+    },
+    {
+      "title": "[DECISION] Límites de seguridad y privacidad de datos",
+      "body": "## Contexto\nDataNaut eventualmente conectará a bases de datos con información confidencial. Necesitamos definir límites de seguridad desde el MVP.\n\n## Decisiones por tomar:\n\n### 1. Detección de PII (Personally Identifiable Information)\n**Opciones:**\n- A: Solo detectar y alertar al usuario (no bloquear)\n- B: Detectar y requerir confirmación para procesar\n- C: Auto-anonimizar (hashing de columnas detectadas)\n\n**Columnas a detectar:**\n- Emails (regex)\n- Credit cards (Luhn algorithm)\n- SSN/National IDs (patterns)\n- Phone numbers\n- Names (diccionario)\n\n### 2. Límites de archivos\n- ¿Tamaño máximo por archivo? (10MB, 50MB, 100MB?)\n- ¿Límites por IP/usuario? (Rate limiting)\n- ¿Timeout de análisis? (30s, 60s, 120s?)\n\n### 3. Retención de datos\n- ¿Cuánto tiempo guardamos datasets en servidor? (no guardar, 24h, 7 días?)\n- ¿Encriptar datasets en reposo? (S3 con SSE, local encryption?)\n- ¿Auditar accesos? (logs de quién sube qué)\n\n### 4. Conexión a BD (futuro)\n- ¿Método de autenticación? (connection strings, IAM roles, SSH tunnels?)\n- ¿Cifrado en tránsito? (TLS 1.2+ obligatorio)\n- ¿Query sanitization? (prevenir SQL injection)\n- ¿Row-level security? (usuarios solo ven sus datos)\n\n## Acceptance Criteria:\n- [ ] Política de seguridad documentada en /docs/security-policy.md\n- [ ] Implementar validator de PII en Fase 1.2\n- [ ] Configurar límites de archivo\n- [ ] Decisiones documentadas en ADR",
+      "labels": "business-logic,security,decision-needed,priority-high"
+    }
+  ]
+}
